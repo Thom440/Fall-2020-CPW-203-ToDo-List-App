@@ -12,7 +12,13 @@ window.onload = function() {
 function main() {
     if (isValid()) {
         let item = getToDoItem();
-        displayToDoItem(item);
+        if (item.isCompleted) {
+            displayCompletedItem(item);
+        }
+        else {
+            displayToDoItem(item);
+        }
+        
     }
 }
 
@@ -30,7 +36,7 @@ function getToDoItem():ToDoItem {
     let item = new ToDoItem;
     item.title = getById("title").value;
     item.dueDate = new Date(getById("due-date").value);
-    item.isCompleted = getById("complete").checked;
+    item.isCompleted = getById("is-complete").checked;
     return item;
 }
 
@@ -44,16 +50,40 @@ function displayToDoItem(item:ToDoItem):void {
     let date = document.createElement("p");
     date.innerText = item.dueDate.toDateString();
 
+    let checkBox = document.createElement("input");
+    checkBox.setAttribute("type", "checkbox");
+    checkBox.classList.add("checkBox");
+
+    let dialogue = document.createElement("p");
+    dialogue.innerText = "Check when completed";
+
     let itemDiv = document.createElement("div");
-    if (item.isCompleted) {
-        itemDiv.classList.add("completed");
-    }
+    // if (item.isCompleted) {
+    //     itemDiv.classList.add("completed");
+    // }
+
+    itemDiv.appendChild(text);
+    itemDiv.appendChild(date);
+    itemDiv.appendChild(checkBox);
+    itemDiv.appendChild(dialogue);
+
+    document.getElementById("incomplete").appendChild(itemDiv);
+
+}
+
+function displayCompletedItem(item:ToDoItem):void {
+    let text = document.createElement("h3")
+    text.innerText = item.title;
+
+    let date = document.createElement("p");
+    date.innerText = item.dueDate.toDateString();
+
+    let itemDiv = document.createElement("div");
 
     itemDiv.appendChild(text);
     itemDiv.appendChild(date);
 
-    document.getElementById("incomplete").appendChild(itemDiv);
-
+    document.getElementById("complete").appendChild(itemDiv);
 }
 
 function getById(id):HTMLInputElement {
