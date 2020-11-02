@@ -11,8 +11,7 @@
     <label for="title">Title</label>
     <input type="text" id="title">
     
-    <input type="checkbox">
-    <label for="complete">Complete?</label>
+    
     <span>*</span>
     <br>
 
@@ -21,7 +20,15 @@
     <span>*</span>
     <br>
 
-    <input type="button" value="Add Item">
+    <input type="checkbox" id="complete">
+    <label for="complete" >Complete?</label>
+    <br>
+
+    <input type="button" value="Add Item" id="add-item">
+
+    <h3>ToDo Items</h3>
+    <div id="incomplete"></div>
+    <div id="complete"></div>
 
     
     <script src="https://unpkg.com/js-datepicker"></script>
