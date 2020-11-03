@@ -1,0 +1,19 @@
+.checkbox {
+    float: left;
+}
+
+.todo {
+    width: 20%;
+    box-sizing: border-box;
+    background-color: lightblue;
+    padding: .25em;
+    border-radius: 1em;
+}
+
+.todo h3 {
+    margin: 0px;
+}
+
+.todo p {
+    margin: 0px;
+}
