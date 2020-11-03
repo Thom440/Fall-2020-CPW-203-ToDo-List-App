@@ -44,15 +44,11 @@ function getToDoItem():ToDoItem {
  * Display ToDoItem on webpage
  */
 function displayToDoItem(item:ToDoItem):void {
-    let text = document.createElement("h3");
-    text.innerText = item.title;
+    let text = setTitle(item);
 
-    let date = document.createElement("p");
-    date.innerText = item.dueDate.toDateString();
+    let date = setDate(item);
 
-    let checkBox = document.createElement("input");
-    checkBox.setAttribute("type", "checkbox");
-    checkBox.classList.add("checkBox");
+    let checkBox = setCheckBox();
 
     let dialogue = document.createElement("p");
     dialogue.innerText = "Check when completed";
@@ -71,12 +67,29 @@ function displayToDoItem(item:ToDoItem):void {
 
 }
 
-function displayCompletedItem(item:ToDoItem):void {
-    let text = document.createElement("h3")
-    text.innerText = item.title;
+function setCheckBox() {
+    let checkBox = document.createElement("input");
+    checkBox.setAttribute("type", "checkbox");
+    checkBox.classList.add("checkbox");
+    return checkBox;
+}
 
+function setDate(item: ToDoItem) {
     let date = document.createElement("p");
     date.innerText = item.dueDate.toDateString();
+    return date;
+}
+
+function setTitle(item: ToDoItem) {
+    let text = document.createElement("h3");
+    text.innerText = item.title;
+    return text;
+}
+
+function displayCompletedItem(item:ToDoItem):void {
+    let text = setTitle(item);
+
+    let date = setDate(item);
 
     let itemDiv = document.createElement("div");
 

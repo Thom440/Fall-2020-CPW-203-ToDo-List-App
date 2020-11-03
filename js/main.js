@@ -29,13 +29,9 @@ function getToDoItem() {
     return item;
 }
 function displayToDoItem(item) {
-    var text = document.createElement("h3");
-    text.innerText = item.title;
-    var date = document.createElement("p");
-    date.innerText = item.dueDate.toDateString();
-    var checkBox = document.createElement("input");
-    checkBox.setAttribute("type", "checkbox");
-    checkBox.classList.add("checkBox");
+    var text = setTitle(item);
+    var date = setDate(item);
+    var checkBox = setCheckBox();
     var dialogue = document.createElement("p");
     dialogue.innerText = "Check when completed";
     var itemDiv = document.createElement("div");
@@ -45,11 +41,25 @@ function displayToDoItem(item) {
     itemDiv.appendChild(dialogue);
     document.getElementById("incomplete").appendChild(itemDiv);
 }
-function displayCompletedItem(item) {
-    var text = document.createElement("h3");
-    text.innerText = item.title;
+function setCheckBox() {
+    var checkBox = document.createElement("input");
+    checkBox.setAttribute("type", "checkbox");
+    checkBox.classList.add("checkbox");
+    return checkBox;
+}
+function setDate(item) {
     var date = document.createElement("p");
     date.innerText = item.dueDate.toDateString();
+    return date;
+}
+function setTitle(item) {
+    var text = document.createElement("h3");
+    text.innerText = item.title;
+    return text;
+}
+function displayCompletedItem(item) {
+    var text = setTitle(item);
+    var date = setDate(item);
     var itemDiv = document.createElement("div");
     itemDiv.appendChild(text);
     itemDiv.appendChild(date);
