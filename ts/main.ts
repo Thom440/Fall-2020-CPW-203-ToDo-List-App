@@ -1,7 +1,7 @@
 class ToDoItem {
     title:string;
     dueDate:Date;
-    isCompleted:boolean;
+    //isCompleted:boolean;
 }
 
 window.onload = function() {
@@ -12,13 +12,7 @@ window.onload = function() {
 function main() {
     if (isValid()) {
         let item = getToDoItem();
-        if (item.isCompleted) {
-            displayCompletedItem(item);
-        }
-        else {
-            displayToDoItem(item);
-        }
-        
+        displayToDoItem(item);
     }
 }
 
@@ -36,7 +30,7 @@ function getToDoItem():ToDoItem {
     let item = new ToDoItem;
     item.title = getById("title").value;
     item.dueDate = new Date(getById("due-date").value);
-    item.isCompleted = getById("is-complete").checked;
+    //item.isCompleted = getById("is-complete").checked;
     return item;
 }
 
@@ -97,22 +91,20 @@ function setTitle(item: ToDoItem) {
     return text;
 }
 
-function displayCompletedItem(item:ToDoItem):void {
-    let text = setTitle(item);
+// function displayCompletedItem(item:ToDoItem):void {
+//     let text = setTitle(item);
 
-    let date = setDate(item);
+//     let date = setDate(item);
 
-    let itemDiv = document.createElement("div");
+//     let itemDiv = document.createElement("div");
 
-    itemDiv.appendChild(text);
-    itemDiv.appendChild(date);
+//     itemDiv.appendChild(text);
+//     itemDiv.appendChild(date);
 
-    document.getElementById("complete").appendChild(itemDiv);
-}
+//     document.getElementById("complete").appendChild(itemDiv);
+// }
 
 function getById(id):HTMLInputElement {
     return <HTMLInputElement>document.getElementById(id);
 }
-
-// Task: Allow user to mark item complete
 // Store items in web storage
