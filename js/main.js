@@ -8,13 +8,49 @@ window.onload = function () {
     addItem.onclick = main;
 };
 function main() {
+    clearSpans();
     if (isValid()) {
         var item = getToDoItem();
         displayToDoItem(item);
     }
 }
+function clearSpans() {
+    var title = getById("title");
+    title.nextElementSibling.innerHTML = "*";
+    var date = getById("due-date");
+    date.nextElementSibling.innerHTML = "*";
+}
 function isValid() {
+    var isValid = true;
+    if (!validateTitle()) {
+        isValid = false;
+    }
+    if (!validateDate()) {
+        isValid = false;
+    }
+    return isValid;
+}
+function validateTitle() {
+    var title = getById("title");
+    var todoTitle = title.value;
+    if (todoTitle.trim() == "") {
+        title.nextElementSibling.innerHTML = "Title is Required";
+        return false;
+    }
     return true;
+}
+function validateDate() {
+    var date = getById("due-date");
+    var dueDate = date.value;
+    var pattern = /[A-Za-z]{3} [A-Za-z]{3} \d{2} \d{4}/;
+    console.log(pattern.test(dueDate));
+    if (pattern.test(dueDate)) {
+        return true;
+    }
+    else {
+        date.nextElementSibling.innerHTML = "Use drop down calendar to enter date";
+        return false;
+    }
 }
 function getToDoItem() {
     var item = new ToDoItem;

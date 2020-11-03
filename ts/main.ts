@@ -10,17 +10,59 @@ window.onload = function() {
 }
 
 function main() {
+    clearSpans();
+
     if (isValid()) {
         let item = getToDoItem();
         displayToDoItem(item);
     }
 }
 
+function clearSpans() {
+    let title = getById("title");
+    title.nextElementSibling.innerHTML = "*";
+
+    let date = getById("due-date");
+    date.nextElementSibling.innerHTML = "*";
+}
+
 /**
  * Check form data is valid
  */
 function isValid():boolean {
+    let isValid = true;
+    if (!validateTitle()) {
+        isValid = false;
+    }
+    if (!validateDate()) {
+        isValid = false;
+    }
+    return isValid;
+}
+
+function validateTitle():boolean {
+    let title = getById("title");
+    let todoTitle = title.value;
+
+    if (todoTitle.trim() == "") {
+        title.nextElementSibling.innerHTML = "Title is Required";
+        return false;
+    }
     return true;
+}
+
+function validateDate():boolean {
+    let date = getById("due-date");
+    let dueDate = date.value;
+    let pattern = /[A-Za-z]{3} [A-Za-z]{3} \d{2} \d{4}/;
+    console.log(pattern.test(dueDate));
+    if (pattern.test(dueDate)) {
+        return true;
+    }
+    else {
+        date.nextElementSibling.innerHTML = "Use drop down calendar to enter date"
+        return false;
+    }
 }
 
 /**
