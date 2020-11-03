@@ -8,6 +8,7 @@
     background-color: lightblue;
     padding: .25em;
     border-radius: 1em;
+    margin-bottom: 1em;
 }
 
 .todo h3 {
@@ -16,4 +17,16 @@
 
 .todo p {
     margin: 0px;
+}
+
+.complete {
+    text-decoration: line-through;
+    background-color: lightgreen;
+}
+
+label {
+    display: inline-block;
+    width: 5%;
+    margin-right: 2em;
+    
 }
