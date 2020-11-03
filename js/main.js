@@ -32,14 +32,25 @@ function displayToDoItem(item) {
     var text = setTitle(item);
     var date = setDate(item);
     var checkBox = setCheckBox();
+    checkBox.onclick = markAsComplete;
     var dialogue = document.createElement("p");
     dialogue.innerText = "Check when completed";
     var itemDiv = document.createElement("div");
+    itemDiv.classList.add("todo");
     itemDiv.appendChild(text);
     itemDiv.appendChild(date);
     itemDiv.appendChild(checkBox);
     itemDiv.appendChild(dialogue);
     document.getElementById("incomplete").appendChild(itemDiv);
+}
+function markAsComplete() {
+    console.log(this);
+    console.log(this.parentElement);
+    var itemDiv = this.parentElement;
+    console.log(itemDiv);
+    var completedItems = getById("complete");
+    console.log(completedItems);
+    completedItems.appendChild(itemDiv);
 }
 function setCheckBox() {
     var checkBox = document.createElement("input");

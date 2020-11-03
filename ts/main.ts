@@ -50,14 +50,14 @@ function displayToDoItem(item:ToDoItem):void {
 
     let checkBox = setCheckBox();
 
+    checkBox.onclick = markAsComplete;
+
     let dialogue = document.createElement("p");
     dialogue.innerText = "Check when completed";
 
     let itemDiv = document.createElement("div");
-    // if (item.isCompleted) {
-    //     itemDiv.classList.add("completed");
-    // }
-
+    itemDiv.classList.add("todo");
+    
     itemDiv.appendChild(text);
     itemDiv.appendChild(date);
     itemDiv.appendChild(checkBox);
@@ -65,6 +65,17 @@ function displayToDoItem(item:ToDoItem):void {
 
     document.getElementById("incomplete").appendChild(itemDiv);
 
+}
+
+function markAsComplete() {
+    console.log(this);
+    console.log(this.parentElement);
+    let itemDiv = <HTMLElement>this.parentElement;
+    console.log(itemDiv);
+
+    let completedItems = getById("complete");
+    console.log(completedItems);
+    completedItems.appendChild(itemDiv);
 }
 
 function setCheckBox() {
