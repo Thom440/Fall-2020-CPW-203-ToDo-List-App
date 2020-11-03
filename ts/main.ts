@@ -65,11 +65,13 @@ function markAsComplete() {
     console.log(this);
     console.log(this.parentElement);
     let itemDiv = <HTMLElement>this.parentElement;
+    itemDiv.classList.add("complete");
     console.log(itemDiv);
 
     let completedItems = getById("complete");
     console.log(completedItems);
     completedItems.appendChild(itemDiv);
+    
 }
 
 function setCheckBox() {

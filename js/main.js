@@ -41,6 +41,7 @@ function markAsComplete() {
     console.log(this);
     console.log(this.parentElement);
     var itemDiv = this.parentElement;
+    itemDiv.classList.add("complete");
     console.log(itemDiv);
     var completedItems = getById("complete");
     console.log(completedItems);
