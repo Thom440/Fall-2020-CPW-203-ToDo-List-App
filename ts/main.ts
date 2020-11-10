@@ -120,12 +120,26 @@ function markAsComplete() {
     console.log(this.parentElement);
     let itemDiv = <HTMLElement>this.parentElement;
     itemDiv.classList.add("complete");
-    console.log(itemDiv);
+    //console.log(itemDiv);
 
     let completedItems = getById("complete");
-    console.log(completedItems);
+    //console.log(completedItems);
     completedItems.appendChild(itemDiv);
     
+    let title = itemDiv.firstChild.textContent;
+    console.log(title);
+    deleteObjectFromList(title);
+}
+
+function deleteObjectFromList(title: string) {
+    let currentItems = getToDoItems();
+    for (let i = 0; i < currentItems.length; i++) {
+        if (currentItems[i].title == title) {
+            currentItems.splice(i, 1);
+        }
+    }
+    let currentItemsString = JSON.stringify(currentItems);
+    localStorage.setItem(todokey, currentItemsString);
 }
 
 function setCheckBox() {

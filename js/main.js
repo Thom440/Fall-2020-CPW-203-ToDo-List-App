@@ -86,10 +86,21 @@ function markAsComplete() {
     console.log(this.parentElement);
     var itemDiv = this.parentElement;
     itemDiv.classList.add("complete");
-    console.log(itemDiv);
     var completedItems = getById("complete");
-    console.log(completedItems);
     completedItems.appendChild(itemDiv);
+    var title = itemDiv.firstChild.textContent;
+    console.log(title);
+    deleteObjectFromList(title);
+}
+function deleteObjectFromList(title) {
+    var currentItems = getToDoItems();
+    for (var i = 0; i < currentItems.length; i++) {
+        if (currentItems[i].title == title) {
+            currentItems.splice(i, 1);
+        }
+    }
+    var currentItemsString = JSON.stringify(currentItems);
+    localStorage.setItem(todokey, currentItemsString);
 }
 function setCheckBox() {
     var checkBox = document.createElement("input");
