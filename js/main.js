@@ -3,6 +3,11 @@ var ToDoItem = (function () {
     }
     return ToDoItem;
 }());
+var CompletedItems = (function () {
+    function CompletedItems() {
+    }
+    return CompletedItems;
+}());
 window.onload = function () {
     var addItem = document.getElementById("add-item");
     addItem.onclick = main;
@@ -11,7 +16,12 @@ window.onload = function () {
 function loadSavedItems() {
     var itemArray = getToDoItems();
     for (var i = 0; i < itemArray.length; i++) {
+        console.log(itemArray[i]);
         displayToDoItem(itemArray[i]);
+    }
+    var itemArray2 = getCompleteItems();
+    for (var i = 0; i < itemArray2.length; i++) {
+        displayCompletedItem(itemArray2[i]);
     }
 }
 function main() {
@@ -91,6 +101,17 @@ function markAsComplete() {
     var title = itemDiv.firstChild.textContent;
     console.log(title);
     deleteObjectFromList(title);
+    var completeItem = getComplete(itemDiv);
+    saveComplete(completeItem);
+}
+function getComplete(itemDiv) {
+    var completeItem = new CompletedItems;
+    var title = itemDiv.firstChild;
+    var date = title.nextElementSibling;
+    console.log("testing " + date);
+    completeItem.title = title.textContent;
+    completeItem.dueDate = new Date(date.textContent);
+    return completeItem;
 }
 function deleteObjectFromList(title) {
     var currentItems = getToDoItems();
@@ -114,10 +135,24 @@ function setDate(item) {
     date.innerText = dueDate.toDateString();
     return date;
 }
+function setCompleteDate(completeItem) {
+    var date = document.createElement("p");
+    var dueDate = new Date(completeItem.dueDate.toString());
+    date.innerText = dueDate.toDateString();
+    return date;
+}
 function setTitle(item) {
     var text = document.createElement("h3");
     text.innerText = item.title;
     return text;
+}
+function displayCompletedItem(completeItem) {
+    var text = setTitle(completeItem);
+    var date = setCompleteDate(completeItem);
+    var itemDiv = document.createElement("div");
+    itemDiv.appendChild(text);
+    itemDiv.appendChild(date);
+    document.getElementById("complete").appendChild(itemDiv);
 }
 function getById(id) {
     return document.getElementById(id);
@@ -132,8 +167,23 @@ function saveToDo(item) {
     localStorage.setItem(todokey, currentItemsString);
 }
 var todokey = "todo";
+var completekey = "complete";
 function getToDoItems() {
     var itemString = localStorage.getItem(todokey);
     var item = JSON.parse(itemString);
     return item;
+}
+function getCompleteItems() {
+    var completedItemString = localStorage.getItem(completekey);
+    var completedItems = JSON.parse(completedItemString);
+    return completedItems;
+}
+function saveComplete(completeItem) {
+    var completedItems = getCompleteItems();
+    if (completedItems == null) {
+        completedItems = new Array();
+    }
+    completedItems.push(completeItem);
+    var completeItemsString = JSON.stringify(completedItems);
+    localStorage.setItem(completekey, completeItemsString);
 }

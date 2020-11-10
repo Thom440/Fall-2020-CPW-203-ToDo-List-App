@@ -4,6 +4,11 @@ class ToDoItem {
     //isCompleted:boolean;
 }
 
+class CompletedItems {
+    title:string;
+    dueDate:Date;
+}
+
 window.onload = function() {
     let addItem = document.getElementById("add-item");
     addItem.onclick = main;
@@ -15,7 +20,12 @@ window.onload = function() {
 function loadSavedItems() {
     let itemArray = getToDoItems();
     for (let i = 0; i < itemArray.length; i++) {
+        console.log(itemArray[i]);
         displayToDoItem(itemArray[i]);
+    }
+    let itemArray2 = getCompleteItems();
+    for (let i = 0; i < itemArray2.length; i++) {
+        displayCompletedItem(itemArray2[i]);
     }
     
 }
@@ -129,6 +139,21 @@ function markAsComplete() {
     let title = itemDiv.firstChild.textContent;
     console.log(title);
     deleteObjectFromList(title);
+    let completeItem = getComplete(itemDiv);
+    saveComplete(completeItem);
+    
+}
+
+function getComplete(itemDiv) {
+    let completeItem = new CompletedItems;
+    let title = itemDiv.firstChild;
+    let date = title.nextElementSibling;
+    console.log("testing " + date);
+    completeItem.title = title.textContent;
+    completeItem.dueDate = new Date(date.textContent);
+    // completeItem.dueDate = date;
+    //item.isCompleted = getById("is-complete").checked;
+    return completeItem;
 }
 
 function deleteObjectFromList(title: string) {
@@ -157,24 +182,32 @@ function setDate(item: ToDoItem) {
     return date;
 }
 
+function setCompleteDate(completeItem:CompletedItems) {
+    let date = document.createElement("p");
+    let dueDate = new Date(completeItem.dueDate.toString());
+    date.innerText = dueDate.toDateString();
+    return date;
+}
+
 function setTitle(item: ToDoItem) {
     let text = document.createElement("h3");
     text.innerText = item.title;
     return text;
 }
 
-// function displayCompletedItem(item:ToDoItem):void {
-//     let text = setTitle(item);
+function displayCompletedItem(completeItem:CompletedItems):void {
+    let text = setTitle(completeItem);
 
-//     let date = setDate(item);
+    let date = setCompleteDate(completeItem);
+    
 
-//     let itemDiv = document.createElement("div");
+    let itemDiv = document.createElement("div");
 
-//     itemDiv.appendChild(text);
-//     itemDiv.appendChild(date);
+    itemDiv.appendChild(text);
+    itemDiv.appendChild(date);
 
-//     document.getElementById("complete").appendChild(itemDiv);
-// }
+    document.getElementById("complete").appendChild(itemDiv);
+}
 
 function getById(id):HTMLInputElement {
     return <HTMLInputElement>document.getElementById(id);
@@ -193,6 +226,7 @@ function saveToDo(item:ToDoItem):void {
 }
 
 const todokey = "todo";
+const completekey = "complete"
 
 /**
  * Get stored ToDo items or return null if none are found
@@ -201,4 +235,21 @@ function getToDoItems():ToDoItem[] {
     let itemString = localStorage.getItem(todokey);
     let item:ToDoItem[] = JSON.parse(itemString);
     return item;
+}
+
+function getCompleteItems():CompletedItems[] {
+    let completedItemString = localStorage.getItem(completekey);
+    let completedItems:CompletedItems[] = JSON.parse(completedItemString);
+    return completedItems;
+}
+
+function saveComplete(completeItem:CompletedItems):void {
+    let completedItems = getCompleteItems();
+    if (completedItems == null) {
+        completedItems = new Array();
+    }
+    completedItems.push(completeItem);
+
+    let completeItemsString = JSON.stringify(completedItems);
+    localStorage.setItem(completekey, completeItemsString);
 }
