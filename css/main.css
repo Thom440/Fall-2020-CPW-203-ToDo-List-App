@@ -30,3 +30,21 @@ label {
     margin-right: 2em;
     
 }
+
+#complete div {
+    width: 20%;
+    text-decoration: line-through;
+    background-color: lightgreen;
+    box-sizing: border-box;
+    padding: .25em;
+    border-radius: 1em;
+    margin-bottom: 1em;
+}
+
+#complete div h3 {
+    margin: 0px;
+}
+
+#complete div p {
+    margin: 0px;
+}
