@@ -13,8 +13,27 @@ window.onload = function() {
     let addItem = document.getElementById("add-item");
     addItem.onclick = main;
 
+    let clearCompleted = getById("clear-completed");
+    clearCompleted.onclick = clearCompletedItems;
+
     // Load Saved Item
     loadSavedItems();
+}
+
+function clearCompletedItems() {
+    let itemArray = getCompleteItems();
+    if (itemArray.length > 0) {
+        for (let i = itemArray.length - 1; i >= 0; i--) {
+            itemArray.splice(i, 1);
+        }
+        let completeItemsString = JSON.stringify(itemArray);
+        localStorage.setItem(completekey, completeItemsString);
+
+        let parentDiv = getById("complete");
+        while (parentDiv.hasChildNodes()) {
+            parentDiv.removeChild(parentDiv.firstChild);
+        }
+    }
 }
 
 function loadSavedItems() {

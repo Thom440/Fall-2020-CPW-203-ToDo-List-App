@@ -11,8 +11,24 @@ var CompletedItems = (function () {
 window.onload = function () {
     var addItem = document.getElementById("add-item");
     addItem.onclick = main;
+    var clearCompleted = getById("clear-completed");
+    clearCompleted.onclick = clearCompletedItems;
     loadSavedItems();
 };
+function clearCompletedItems() {
+    var itemArray = getCompleteItems();
+    if (itemArray.length > 0) {
+        for (var i = itemArray.length - 1; i >= 0; i--) {
+            itemArray.splice(i, 1);
+        }
+        var completeItemsString = JSON.stringify(itemArray);
+        localStorage.setItem(completekey, completeItemsString);
+        var parentDiv = getById("complete");
+        while (parentDiv.hasChildNodes()) {
+            parentDiv.removeChild(parentDiv.firstChild);
+        }
+    }
+}
 function loadSavedItems() {
     var itemArray = getToDoItems();
     for (var i = 0; i < itemArray.length; i++) {
