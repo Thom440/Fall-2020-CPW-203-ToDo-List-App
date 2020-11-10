@@ -7,6 +7,14 @@ class ToDoItem {
 window.onload = function() {
     let addItem = document.getElementById("add-item");
     addItem.onclick = main;
+
+    // Load Saved Item
+    loadSavedItem();
+}
+
+function loadSavedItem() {
+    let item = getToDo();
+    displayToDoItem(item);
 }
 
 function main() {
@@ -15,6 +23,7 @@ function main() {
     if (isValid()) {
         let item = getToDoItem();
         displayToDoItem(item);
+        saveToDo(item);
     }
 }
 
@@ -125,7 +134,9 @@ function setCheckBox() {
 
 function setDate(item: ToDoItem) {
     let date = document.createElement("p");
-    date.innerText = item.dueDate.toDateString();
+    // date.innerText = item.dueDate.toDateString();
+    let dueDate = new Date(item.dueDate.toString());
+    date.innerText = dueDate.toDateString();
     return date;
 }
 
@@ -152,3 +163,22 @@ function getById(id):HTMLInputElement {
     return <HTMLInputElement>document.getElementById(id);
 }
 // Store items in web storage
+
+function saveToDo(item:ToDoItem):void {
+    // Convert ToDoItem into JSON string
+    let itemString = JSON.stringify(item);
+
+    // Save string
+    localStorage.setItem(todokey, itemString);
+}
+
+const todokey = "todo";
+
+/**
+ * Get stored ToDo item or return null if none is found
+ */
+function getToDo():ToDoItem {
+    let itemString = localStorage.getItem(todokey);
+    let item:ToDoItem = JSON.parse(itemString);
+    return item;
+}
