@@ -31,13 +31,17 @@ function clearCompletedItems() {
 }
 function loadSavedItems() {
     var itemArray = getToDoItems();
-    for (var i = 0; i < itemArray.length; i++) {
-        console.log(itemArray[i]);
-        displayToDoItem(itemArray[i]);
+    if (itemArray != null) {
+        for (var i = 0; i < itemArray.length; i++) {
+            console.log(itemArray[i]);
+            displayToDoItem(itemArray[i]);
+        }
     }
     var itemArray2 = getCompleteItems();
-    for (var i = 0; i < itemArray2.length; i++) {
-        displayCompletedItem(itemArray2[i]);
+    if (itemArray2 != null) {
+        for (var i = 0; i < itemArray2.length; i++) {
+            displayCompletedItem(itemArray2[i]);
+        }
     }
 }
 function main() {

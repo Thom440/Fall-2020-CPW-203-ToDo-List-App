@@ -38,13 +38,17 @@ function clearCompletedItems() {
 
 function loadSavedItems() {
     let itemArray = getToDoItems();
-    for (let i = 0; i < itemArray.length; i++) {
-        console.log(itemArray[i]);
-        displayToDoItem(itemArray[i]);
+    if (itemArray != null) {
+        for (let i = 0; i < itemArray.length; i++) {
+            console.log(itemArray[i]);
+            displayToDoItem(itemArray[i]);
+        }
     }
     let itemArray2 = getCompleteItems();
-    for (let i = 0; i < itemArray2.length; i++) {
-        displayCompletedItem(itemArray2[i]);
+    if (itemArray2 != null) {
+        for (let i = 0; i < itemArray2.length; i++) {
+            displayCompletedItem(itemArray2[i]);
+        }
     }
     
 }
