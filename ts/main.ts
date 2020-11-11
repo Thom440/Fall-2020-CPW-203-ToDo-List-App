@@ -1,7 +1,6 @@
 class ToDoItem {
     title:string;
     dueDate:Date;
-    //isCompleted:boolean;
 }
 
 class CompletedItems {
@@ -22,7 +21,7 @@ window.onload = function() {
 
 function clearCompletedItems() {
     let itemArray = getCompleteItems();
-    if (itemArray.length > 0) {
+    if (itemArray != null) {
         for (let i = itemArray.length - 1; i >= 0; i--) {
             itemArray.splice(i, 1);
         }
@@ -123,7 +122,6 @@ function getToDoItem():ToDoItem {
     let item = new ToDoItem;
     item.title = getById("title").value;
     item.dueDate = new Date(getById("due-date").value);
-    //item.isCompleted = getById("is-complete").checked;
     return item;
 }
 
@@ -177,8 +175,6 @@ function getComplete(itemDiv) {
     let date = title.nextElementSibling;
     completeItem.title = title.textContent;
     completeItem.dueDate = new Date(date.textContent);
-    // completeItem.dueDate = date;
-    //item.isCompleted = getById("is-complete").checked;
     return completeItem;
 }
 
@@ -202,7 +198,6 @@ function setCheckBox() {
 
 function setDate(item: ToDoItem) {
     let date = document.createElement("p");
-    // date.innerText = item.dueDate.toDateString();
     let dueDate = new Date(item.dueDate.toString());
     date.innerText = dueDate.toDateString();
     return date;

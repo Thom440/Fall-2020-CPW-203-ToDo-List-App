@@ -17,7 +17,7 @@ window.onload = function () {
 };
 function clearCompletedItems() {
     var itemArray = getCompleteItems();
-    if (itemArray.length > 0) {
+    if (itemArray != null) {
         for (var i = itemArray.length - 1; i >= 0; i--) {
             itemArray.splice(i, 1);
         }
