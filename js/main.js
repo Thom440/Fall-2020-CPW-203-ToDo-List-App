@@ -50,7 +50,6 @@ function main() {
     }
 }
 function clearFields() {
-    alert("clear fields");
     getById("title").value = "";
     getById("due-date").value = "";
 }
