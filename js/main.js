@@ -46,7 +46,13 @@ function main() {
         var item = getToDoItem();
         displayToDoItem(item);
         saveToDo(item);
+        clearFields();
     }
+}
+function clearFields() {
+    alert("clear fields");
+    getById("title").value = "";
+    getById("due-date").value = "";
 }
 function clearSpans() {
     var title = getById("title");
@@ -108,23 +114,18 @@ function displayToDoItem(item) {
     document.getElementById("incomplete").appendChild(itemDiv);
 }
 function markAsComplete() {
-    console.log(this);
-    console.log(this.parentElement);
     var itemDiv = this.parentElement;
-    itemDiv.classList.add("complete");
-    var completedItems = getById("complete");
-    completedItems.appendChild(itemDiv);
     var title = itemDiv.firstChild.textContent;
-    console.log(title);
     deleteObjectFromList(title);
     var completeItem = getComplete(itemDiv);
+    this.parentElement.remove();
     saveComplete(completeItem);
+    displayCompletedItem(completeItem);
 }
 function getComplete(itemDiv) {
     var completeItem = new CompletedItems;
     var title = itemDiv.firstChild;
     var date = title.nextElementSibling;
-    console.log("testing " + date);
     completeItem.title = title.textContent;
     completeItem.dueDate = new Date(date.textContent);
     return completeItem;

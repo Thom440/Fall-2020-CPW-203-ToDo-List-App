@@ -56,7 +56,13 @@ function main() {
         let item = getToDoItem();
         displayToDoItem(item);
         saveToDo(item);
+        clearFields();
     }
+}
+
+function clearFields() {
+    getById("title").value = "";
+    getById("due-date").value = "";
 }
 
 function clearSpans() {
@@ -145,21 +151,18 @@ function displayToDoItem(item:ToDoItem):void {
 }
 
 function markAsComplete() {
-    console.log(this);
-    console.log(this.parentElement);
     let itemDiv = <HTMLElement>this.parentElement;
-    itemDiv.classList.add("complete");
-    //console.log(itemDiv);
-
-    let completedItems = getById("complete");
-    //console.log(completedItems);
-    completedItems.appendChild(itemDiv);
     
     let title = itemDiv.firstChild.textContent;
-    console.log(title);
+    
     deleteObjectFromList(title);
+
     let completeItem = getComplete(itemDiv);
+
+    this.parentElement.remove();
+
     saveComplete(completeItem);
+    displayCompletedItem(completeItem);
     
 }
 
@@ -167,7 +170,6 @@ function getComplete(itemDiv) {
     let completeItem = new CompletedItems;
     let title = itemDiv.firstChild;
     let date = title.nextElementSibling;
-    console.log("testing " + date);
     completeItem.title = title.textContent;
     completeItem.dueDate = new Date(date.textContent);
     // completeItem.dueDate = date;
