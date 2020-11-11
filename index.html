@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,33 +8,33 @@
     <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
-    <h1>ToDo List</h1>
-    <label for="title">Title</label>
-    <input type="text" id="title">
-    
-    
-    <span>*</span>
-    <br>
+    <main>
+        <h1>ToDo List</h1>
+        <label for="title">Title</label>
+        <input type="text" id="title">
 
-    <label for="due-date">Date Due</label>
-    <input type="text" id="due-date">
-    <span>*</span>
-    <br>
 
-    <!--<input type="checkbox" id="is-complete">
-    <label for="complete" >Complete?</label>
-    <br>-->
+        <span>*</span>
+        <br>
 
-    <input type="button" value="Add Item" id="add-item">
-    <input type="button" value="Clear Completed" id="clear-completed">
+        <label for="due-date">Date Due</label>
+        <input type="text" id="due-date">
+        <span>*</span>
+        <br>
 
-    <h3>ToDo Items</h3>
-    <div id="incomplete"></div>
-    <h3>Completed Items</h3>
-    <div id="complete"></div>
+        <input type="button" value="Add Item" id="add-item">
+        <input type="button" value="Clear Completed" id="clear-completed">
+    </main>
 
-    
+    <div id="items">
+        <h3>ToDo Items</h3>
+        <div id="incomplete"></div>
+        <h3>Completed Items</h3>
+        <div id="complete"></div>
+    </div>
+
     <script src="https://unpkg.com/js-datepicker"></script>
     <script>
         const picker = datepicker("#due-date");
@@ -41,4 +42,5 @@
     </script>
     <script src="js/main.js"></script>
 </body>
+
 </html>

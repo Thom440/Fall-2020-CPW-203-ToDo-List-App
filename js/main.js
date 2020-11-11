@@ -104,6 +104,7 @@ function displayToDoItem(item) {
     checkBox.onclick = markAsComplete;
     var dialogue = document.createElement("p");
     dialogue.innerText = "Check when completed";
+    dialogue.classList.add("checkbox-text");
     var itemDiv = document.createElement("div");
     itemDiv.classList.add("todo");
     itemDiv.appendChild(text);

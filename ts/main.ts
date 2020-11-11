@@ -137,6 +137,7 @@ function displayToDoItem(item:ToDoItem):void {
 
     let dialogue = document.createElement("p");
     dialogue.innerText = "Check when completed";
+    dialogue.classList.add("checkbox-text");
 
     let itemDiv = document.createElement("div");
     itemDiv.classList.add("todo");
